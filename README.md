@@ -1,6 +1,8 @@
 # isidore_task
 
-A task for isidore
+A contactsapp task for isidore
+
+This app was built using the flutter framework, I utilised the provider state management library, flutter_graphql library, dependecy injection(get_it) and so many other fantastic features in this project.
 
 ## Getting Started
 
