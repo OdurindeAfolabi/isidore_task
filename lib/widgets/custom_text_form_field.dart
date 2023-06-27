@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:isidore_task/Utils/color_manager.dart';
+import 'package:isidore_task/Utils/font_manager.dart';
 import 'package:isidore_task/Utils/styles_manager.dart';
 
 class TxtForm extends StatelessWidget {
@@ -54,7 +55,7 @@ class TxtForm extends StatelessWidget {
           decoration: InputDecoration(
               suffixIcon: suffixIcon,
               hintText: textFieldHint,
-              hintStyle: getLightStyle(color: ColorManager.grey.withOpacity(0.5)),
+              hintStyle: getLightStyle(color: ColorManager.grey.withOpacity(0.5),fontSize: FontSize.s14),
               focusedBorder: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(
                     Radius.circular(10)),

@@ -66,24 +66,24 @@ class CustomContactCard extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Row(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.phone,
-                                size: 20,
-                                color: ColorManager.grey4,
-                              ),
-                              const SizedBox(width: 5,),
-                              Text(contactDetails.phone ?? "",style: getRegularStyle(color: ColorManager.contactCardTextColor,fontSize: FontSize.s16))
-                            ],
-                          ),
-                          const SizedBox(width: 16,),
-                          Row(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.phone,
+                              size: 20,
+                              color: ColorManager.grey4,
+                            ),
+                            const SizedBox(width: 5,),
+                            Text(contactDetails.phone ?? "",style: getRegularStyle(color: ColorManager.contactCardTextColor,fontSize: FontSize.s16))
+                          ],
+                        ),
+                        const SizedBox(width: 16,),
+                        Expanded(
+                          child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Icon(
@@ -92,11 +92,14 @@ class CustomContactCard extends StatelessWidget {
                                 color: ColorManager.grey4,
                               ),
                               const SizedBox(width: 5,),
-                              Text(contactDetails.email ?? "",style: getRegularStyle(color: ColorManager.contactCardTextColor,fontSize: FontSize.s16))
+                              Expanded(
+                                  child: Text(contactDetails.email ?? "",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: getRegularStyle(color: ColorManager.contactCardTextColor,fontSize: FontSize.s16)))
                             ],
-                          )
-                        ],
-                      ),
+                          ),
+                        )
+                      ],
                     ),
                     const SizedBox(height: 10,),
                     Row(
