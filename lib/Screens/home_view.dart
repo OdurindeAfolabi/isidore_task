@@ -78,7 +78,7 @@ class _HomeViewState extends State<HomeView> {
             return contactProvider.getContacts();
           },
           child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24,vertical: AppPadding.p24),
               child: (contactProvider.viewState.data ?? []).isEmpty ? emptyContactListView(contactProvider) : contactListView(contactProvider)
           ),
         );
@@ -99,7 +99,6 @@ class _HomeViewState extends State<HomeView> {
   Widget contactListView(ContactProvider contactProvider){
     return Column(
       children: [
-        const SizedBox(height: AppSize.s24,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -205,7 +204,7 @@ class _HomeViewState extends State<HomeView> {
   Widget emptyContactListView(ContactProvider contactProvider){
     return Column(
       children: [
-        SizedBox(height: heightSizer(100, context),),
+        SizedBox(height: heightSizer(AppSize.s70, context),),
         Image.asset(ImageAssets.emptyContactImage,height: AppSize.s100,width: AppSize.s100,),
         const SizedBox(height: AppSize.s24,),
         Text("No contacts",style: getSemiBoldStyle(color: ColorManager.secondary,fontSize: FontSize.s20)),

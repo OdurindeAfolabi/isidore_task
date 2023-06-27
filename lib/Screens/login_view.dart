@@ -36,15 +36,15 @@ class _LoginViewState extends State<LoginView> {
         },
         builder: (BuildContext context, LoginProvider viewModel, Widget? child) {
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal:AppPadding.p24),
               child: Form(
                 key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: ListView(
                   children: [
+                    SizedBox(height: heightSizer(AppSize.s100, context)),
                     Center(
                       child: Text("MyContactsApp",
                         textAlign: TextAlign.center,

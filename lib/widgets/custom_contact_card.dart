@@ -66,34 +66,37 @@ class CustomContactCard extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.phone,
-                              size: 20,
-                              color: ColorManager.grey4,
-                            ),
-                            const SizedBox(width: 5,),
-                            Text(contactDetails.phone ?? "",style: getRegularStyle(color: ColorManager.contactCardTextColor,fontSize: FontSize.s16))
-                          ],
-                        ),
-                        const SizedBox(width: 16,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.email_outlined,
-                              size: 20,
-                              color: ColorManager.grey4,
-                            ),
-                            const SizedBox(width: 5,),
-                            Text(contactDetails.email ?? "",style: getRegularStyle(color: ColorManager.contactCardTextColor,fontSize: FontSize.s16))
-                          ],
-                        )
-                      ],
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Row(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.phone,
+                                size: 20,
+                                color: ColorManager.grey4,
+                              ),
+                              const SizedBox(width: 5,),
+                              Text(contactDetails.phone ?? "",style: getRegularStyle(color: ColorManager.contactCardTextColor,fontSize: FontSize.s16))
+                            ],
+                          ),
+                          const SizedBox(width: 16,),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.email_outlined,
+                                size: 20,
+                                color: ColorManager.grey4,
+                              ),
+                              const SizedBox(width: 5,),
+                              Text(contactDetails.email ?? "",style: getRegularStyle(color: ColorManager.contactCardTextColor,fontSize: FontSize.s16))
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 10,),
                     Row(

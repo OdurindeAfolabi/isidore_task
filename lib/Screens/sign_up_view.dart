@@ -38,15 +38,15 @@ class _SignUpViewState extends State<SignUpView> {
         },
         builder: (BuildContext context, SignUpProvider viewModel, Widget? child) {
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal:AppPadding.p24),
+              padding: const EdgeInsets.symmetric(horizontal:AppPadding.p24,vertical: AppPadding.p16),
               child: Form(
                 key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: ListView(
                   children: [
+                    SizedBox(height: heightSizer(AppSize.s70, context),),
                     Center(
                       child: Text("MyContactsApp",
                         textAlign: TextAlign.center,

@@ -19,27 +19,55 @@ class UpdateContactBottomSheet extends StatefulWidget {
   State<UpdateContactBottomSheet> createState() => _UpdateContactBottomSheetState();
 }
 
-class _UpdateContactBottomSheetState extends State<UpdateContactBottomSheet> {
+class _UpdateContactBottomSheetState extends State<UpdateContactBottomSheet> with WidgetsBindingObserver {
   final TextEditingController contactNameController = TextEditingController();
   final TextEditingController contactPhoneNumberController = TextEditingController();
   final TextEditingController contactEmailController = TextEditingController();
   final TextEditingController contactHomeAddressController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FocusNode focusNode = FocusNode();
+  double keyboardHeight = 0.0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    focusNode.addListener(() {
+      if (!focusNode.hasFocus) {
+        // Keyboard lost focus, handle it here
+        setState(() {
+          keyboardHeight = 0;
+        });
+      }
+    });
     contactNameController.text = widget.contactDetails.name ?? "";
     contactPhoneNumberController.text = widget.contactDetails.phone ?? "";
     contactEmailController.text = widget.contactDetails.email ?? "";
     contactHomeAddressController.text = widget.contactDetails.address ?? "";
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeMetrics() {
+    final mediaQueryData = MediaQuery.of(context);
+    final actualKeyboardHeight = mediaQueryData.viewInsets.bottom;
+    setState(() {
+      keyboardHeight = actualKeyboardHeight;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.initializeSize(context);
     return Container(
-      height: SizeConfig.screenHeight * 0.8,
+      height: (SizeConfig.screenHeight * 0.8) + keyboardHeight,
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24,vertical: AppPadding.p16),
       child: Form(
         key: _formKey,
@@ -73,6 +101,7 @@ class _UpdateContactBottomSheetState extends State<UpdateContactBottomSheet> {
               editingController: contactHomeAddressController,
               textFieldHint: "Enter address of contact",
               keyboardType: TextInputType.text,
+              inputAction: TextInputAction.done,
               validator: Validators().isEmpty,),
             const SizedBox(height: AppSize.s24,),
             CustomButton(

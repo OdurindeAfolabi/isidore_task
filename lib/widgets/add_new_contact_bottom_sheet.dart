@@ -17,18 +17,51 @@ class AddNewContactBottomSheet extends StatefulWidget {
   State<AddNewContactBottomSheet> createState() => _AddNewContactBottomSheetState();
 }
 
-class _AddNewContactBottomSheetState extends State<AddNewContactBottomSheet> {
+class _AddNewContactBottomSheetState extends State<AddNewContactBottomSheet> with WidgetsBindingObserver{
   final TextEditingController contactNameController = TextEditingController();
   final TextEditingController contactPhoneNumberController = TextEditingController();
   final TextEditingController contactEmailController = TextEditingController();
   final TextEditingController contactHomeAddressController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FocusNode focusNode = FocusNode();
+  double keyboardHeight = 0.0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    focusNode.addListener(() {
+      if (!focusNode.hasFocus) {
+        // Keyboard lost focus, handle it here
+        setState(() {
+          keyboardHeight = 0;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeMetrics() {
+    final mediaQueryData = MediaQuery.of(context);
+    final actualKeyboardHeight = mediaQueryData.viewInsets.bottom;
+    setState(() {
+      keyboardHeight = actualKeyboardHeight;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.initializeSize(context);
     return Container(
-      height: SizeConfig.screenHeight * 0.8,
-      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24,vertical: AppPadding.p16),
+      height: (SizeConfig.screenHeight * 0.8) + keyboardHeight,
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24,vertical: AppPadding.p24),
       child: Form(
         key: _formKey,
         child: ListView(
@@ -61,6 +94,7 @@ class _AddNewContactBottomSheetState extends State<AddNewContactBottomSheet> {
               editingController: contactHomeAddressController,
               textFieldHint: "Enter address of contact",
               keyboardType: TextInputType.text,
+              inputAction: TextInputAction.done,
               validator: Validators().isEmpty,),
             const SizedBox(height: AppSize.s24,),
             CustomButton(
